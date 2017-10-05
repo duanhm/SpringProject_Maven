@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="springProject">
+	<!-- 查询activiti历史任务 -->
+	<select id="queryActHiTaskInst.sql" parameterClass="java.util.HashMap"
+		resultClass="java.util.HashMap">
+		<![CDATA[
+			select * 
+			from act_hi_taskinst 
+			where proc_inst_id_=#procInstId# 
+			order by  start_time_
+		]]>
+	</select>
+
+	<insert id="saveActHiProcInst.sql" parameterClass="java.util.HashMap">
+		<![CDATA[
+			insert into 
+		 		act_hi_procinst
+		 		(
+		 			ID_,
+					PROC_INST_ID_,
+					PROC_DEF_ID_,
+					START_TIME_,
+					START_ACT_ID_
+		 		) values (
+		 			sys_guid(),
+		 			#procInstId#,
+		 			#procDefId#,
+		 			sysdate,
+		 			#startActId#
+		 		)
+		]]>
+	</insert>
+
+	<insert id="saveActHiActInst.sql" parameterClass="java.util.HashMap">
+		<![CDATA[
+			insert into 
+		 		act_hi_actinst
+		 		(
+		 			ID_,
+					PROC_DEF_ID_,
+					PROC_INST_ID_,
+					EXECUTION_ID_,
+					ACT_ID_,
+					TASK_ID_,
+					ACT_NAME_,
+					ACT_TYPE_,
+					ASSIGNEE_,
+					START_TIME_,
+					END_TIME_,
+					DURATION_
+		 		) values (
+		 			sys_guid(),
+		 			#procDefId#,
+		 			#procInstId#,
+		 			#executionId#,
+		 			#actId#,
+		 			#taskId#,
+		 			#actName#,
+		 			#actType#,
+		 			#assignee#,
+		 			sysdate,
+		 			sysdate,
+		 			#duration#
+		 		)
+		]]>
+	</insert>
+
+	<insert id="saveActHiTaskInst.sql" parameterClass="java.util.HashMap">
+		<![CDATA[
+			insert into 
+		 		act_hi_taskinst
+		 		(
+		 			ID_,
+					PROC_DEF_ID_,
+					TASK_DEF_KEY_,
+					PROC_INST_ID_,
+					EXECUTION_ID_,
+					NAME_,
+					DESCRIPTION_,
+					OWNER_,
+					ASSIGNEE_,
+					START_TIME_,
+					END_TIME_,
+					DURATION_,
+					DELETE_REASON_,
+					PRIORITY_
+		 		) values (
+		 			#id#,
+		 			#procDefId#,
+		 			#taskDefKey#,
+		 			#procInstId#,
+		 			#executionId#,
+		 			#name#,
+		 			#description#,
+		 			#owner#,
+		 			#assignee#,
+		 			sysdate,
+		 			sysdate,
+		 			#duration#,
+		 			#deleteReason#,
+		 			#priority#
+		 		)
+		]]>
+	</insert>
+</sqlMap>

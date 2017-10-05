@@ -1,0 +1,318 @@
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>root</groupId>
+   <version>1.0</version>
+   <artifactId>project</artifactId>
+   <packaging>pom</packaging>
+   <name>project</name>
+   <modules>
+      <module>servlets</module>
+      <module>ejbs</module>
+      <module>ear</module>
+   </modules>
+
+    <!-- 集中定义公用的依赖版本号 -->
+    <!--版本变量设置 start-->
+    <properties>
+        <!--架包版本变量 start-->
+
+        <!--2016-02-20注释掉代码，切换到spring3试试-->
+        <!--mybatis官网看到,如果要使用spring4的话,要用：mybatis-2-spring这个架包,http://blog.mybatis.org/2015/11/spring-4-got-you-down-with-no-ibatis.html-->
+        <!--<spring.version>4.0.2.RELEASE</spring.version>-->
+        <!--<ibatis.version>3.2.6</ibatis.version>-->
+        <!--<mybatis-spring.version>1.2.2</mybatis-spring.version>-->
+
+        <!--2016-02-20切换到spring3试试-->
+        <!--mybatis官网：http://blog.mybatis.org/2016/02/mybatis-331-and-mybatis-spring-124.html,在2016-02-13发布了3.3.1版本-->
+        <spring.version>3.0.6.RELEASE</spring.version>
+
+        <aopalliance.version>1.0</aopalliance.version>
+        <asm.version>3.3.1</asm.version>
+        <aspectjrt.version>1.6.9</aspectjrt.version>
+
+        <!--下面这两个是springAOP需要用到-->
+        <aspectjweaver.version>1.6.9</aspectjweaver.version>
+
+        <cglib.version>2.2</cglib.version>
+        <commons-codec.version>1.10</commons-codec.version>
+        <commons-lang3.version>3.3.2</commons-lang3.version>
+        <commons-lang.version>2.2</commons-lang.version>
+        <commons-logging.version>1.2</commons-logging.version>
+        <commons-pool.version>1.5.6</commons-pool.version>
+
+        <dom4j.version>1.6.1</dom4j.version>
+        <fastjson.version>1.2.29</fastjson.version>
+        <ibatis.version>2.3.0</ibatis.version>
+        <jackson-mapper.version>1.9.9</jackson-mapper.version>
+        <jackson-core.version>1.9.9</jackson-core.version>
+        <jedis.version>2.1.0</jedis.version>
+        <junit.version>4.9</junit.version>
+        <log4j.version>1.2.17</log4j.version>
+
+        <mybatis.version>3.1.1</mybatis.version>
+        <mybatis-spring.version>1.1.1</mybatis-spring.version>
+        <mysql-connector.version>5.1.10</mysql-connector.version>
+        <ojdbc14.version>10.2.0.4.0</ojdbc14.version>
+        <quartz.version>1.7.3</quartz.version>
+        <!--架包版本变量 end-->
+
+    </properties>
+    <!--版本变量设置 end-->
+
+   <dependencyManagement>
+      <dependencies>
+         <dependency>
+            <groupId>root.project.servlets</groupId>
+            <artifactId>servlet</artifactId>
+            <version>1.0</version>
+            <type>war</type>
+         </dependency>
+         <dependency>
+            <groupId>root.project</groupId>
+            <artifactId>ejbs</artifactId>
+            <version>1.0</version>
+            <type>ejb</type>
+         </dependency>
+
+       <!--架包依赖 start-->
+
+           <!-- ############################################################### Spring 相关包 start ############################################################### -->
+           <!--spring 源码包下载地址：https://github.com/spring-projects/spring-framework/releases-->
+           <!--http://takeme.iteye.com/blog/1977585-->
+           <!--http://blog.csdn.net/bluishglc/article/details/6585221-->
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-aop</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-asm</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+          <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-aspects</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-beans</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-context-support</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-context</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-core</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-jdbc</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+           <!--这个jar 文件包含Spring MVC 框架相关的所有类。包括框架的Servlets，Web MVC框架，控制器和视图支持。当然，如果你的应用使用了独立的MVC 框架，则无需这个JAR 文件里的任何类。 外部依赖spring-web-->
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-webmvc</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-oxm</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-tx</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-orm</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-test</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>aopalliance</groupId>
+               <artifactId>aopalliance</artifactId>
+               <version>${aopalliance.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>asm</groupId>
+               <artifactId>asm</artifactId>
+               <version>${asm.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.aspectj</groupId>
+               <artifactId>aspectjrt</artifactId>
+               <version>${aspectjrt.version}</version>
+           </dependency>
+
+
+           <!--下面两个提供对 AspectJ 的支持，是 spring-aspects 所需要依赖的-->
+           <dependency>
+               <groupId>org.aspectj</groupId>
+               <artifactId>aspectjweaver</artifactId>
+               <version>${aspectjweaver.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>cglib</groupId>
+               <artifactId>cglib</artifactId>
+               <version>${cglib.version}</version>
+           </dependency>
+
+           <!--apache工具包-->
+           <dependency>
+               <groupId>commons-codec</groupId>
+               <artifactId>commons-codec</artifactId>
+               <version>${commons-codec.version}</version>
+           </dependency>
+           <dependency>
+               <groupId>org.apache.commons</groupId>
+               <artifactId>commons-lang3</artifactId>
+               <version>${commons-lang3.version}</version>
+           </dependency>
+           <dependency>
+               <groupId>commons-lang</groupId>
+               <artifactId>commons-lang</artifactId>
+               <version>${commons-lang.version}</version>
+           </dependency>
+           <dependency>
+               <groupId>commons-logging</groupId>
+               <artifactId>commons-logging</artifactId>
+               <version>${commons-logging.version}</version>
+           </dependency>
+           <dependency>
+               <groupId>commons-pool</groupId>
+               <artifactId>commons-pool</artifactId>
+               <version>${commons-pool.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>dom4j</groupId>
+               <artifactId>dom4j</artifactId>
+               <version>${dom4j.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>com.alibaba</groupId>
+               <artifactId>fastjson</artifactId>
+               <version>${fastjson.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.apache.ibatis</groupId>
+               <artifactId>ibatis-sqlmap</artifactId>
+               <version>${ibatis.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.codehaus.jackson</groupId>
+               <artifactId>jackson-mapper-asl</artifactId>
+               <version>${jackson-mapper.version}</version>
+           </dependency>
+
+           <dependency>
+               <groupId>org.codehaus.jackson</groupId>
+               <artifactId>jackson-core-asl</artifactId>
+               <version>${jackson-core.version}</version>
+           </dependency>
+
+           <dependency>
+               <artifactId>jedis</artifactId>
+               <groupId>redis.clients</groupId>
+               <version>${jedis.version}</version>
+           </dependency>
+
+           <!--单元测试-->
+           <dependency>
+               <groupId>junit</groupId>
+               <artifactId>junit</artifactId>
+               <version>${junit.version}</version>
+               <scope>test</scope>
+           </dependency>
+
+           <!-- 日志文件管理包 start -->
+           <dependency>
+               <groupId>log4j</groupId>
+               <artifactId>log4j</artifactId>
+               <version>${log4j.version}</version>
+           </dependency>
+
+           <!-- mybatis核心包 -->
+           <dependency>
+               <groupId>org.mybatis</groupId>
+               <artifactId>mybatis</artifactId>
+               <version>${mybatis.version}</version>
+           </dependency>
+           <!-- mybatis/spring包 -->
+           <!--官网英文材料：http://www.mybatis.org/spring/-->
+           <!--官网中文资料：http://www.mybatis.org/spring/zh/index.html-->
+           <dependency>
+               <groupId>org.mybatis</groupId>
+               <artifactId>mybatis-spring</artifactId>
+               <version>${mybatis-spring.version}</version>
+           </dependency>
+
+           <!-- 导入Mysql数据库链接jar包 -->
+           <dependency>
+               <groupId>mysql</groupId>
+               <artifactId>mysql-connector-java</artifactId>
+               <version>${mysql-connector.version}</version>
+               <scope>runtime</scope>
+           </dependency>
+
+           <!-- 导入oracle数据库链接jar包 -->
+           <dependency>
+               <groupId>com.oracle</groupId>
+               <artifactId>ojdbc14</artifactId>
+               <version>${ojdbc14.version}</version>
+           </dependency>
+
+           <!--quartz-->
+           <dependency>
+               <groupId>org.quartz-scheduler</groupId>
+               <artifactId>quartz</artifactId>
+               <version>${quartz.version}</version>
+           </dependency>
+
+          <dependency>
+              <groupId>javax.ejb</groupId>
+              <artifactId>javax.ejb-api</artifactId>
+              <version>3.2</version>
+          </dependency>
+
+       </dependencies>
+       <!--架包依赖 end-->
+   </dependencyManagement>
+</project>

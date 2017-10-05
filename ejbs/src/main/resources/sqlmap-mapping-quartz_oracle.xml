@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="springProject">
+	<!-- 锁机制 加锁 -->
+	<update id="update.quartzLock.sql" parameterClass="java.util.HashMap">
+	<![CDATA[
+		UPDATE cbp_quartz_lock
+		   SET lock_by      = #lockBy#,
+		       lock_date    = sysdate,
+		       expire_date  = sysdate + #lockMins#/(24*60),
+		       updated_by   = #lockBy#,
+		       updated_date = sysdate
+		 WHERE target_type = #targetType#
+		   AND target_id = #targetId#
+		   AND expire_date < sysdate
+	]]>
+	</update>
+
+	<!-- 锁机制 释放锁 -->
+	<update id="update.quartzUnLock.sql" parameterClass="java.util.HashMap">
+		UPDATE cbp_quartz_lock
+		   SET expire_date  = sysdate,
+		       updated_by = #lockBy#,
+		       updated_date = sysdate
+		 WHERE target_type = #targetType#
+		   AND target_id = #targetId#
+		   AND lock_by = #lockBy#
+	</update>
+ 	
+ 	<!--记录JOB运行轨迹-->
+	<insert id="insert.recordJobExecuteLog.sql" parameterClass="java.util.HashMap">
+		<selectKey resultClass="java.lang.String" keyProperty="log_id" >
+	    	select sys_guid() from dual
+	    </selectKey>
+	    
+ 		<![CDATA[
+			insert into cbp_job_execute_log
+			  (id_cbp_job_execute_log,
+			   job_name,
+			   instance_name,
+			   state,
+			   state_desc,
+			   error_msg,
+			   execute_time,
+			   created_by,
+			   created_date,
+			   updated_by,
+			   updated_date)
+			values
+			  (#log_id#,
+			   #job_name#,
+			   #instance_name#,
+			   #state#,
+			   #state_desc#,
+			   #error_msg#,
+			   #execute_time#,
+			   'sys',
+			   sysdate,
+			   'sys',
+			   sysdate)
+ 		]]>
+ 	</insert>
+ 	
+ 	<!--更新JOB运行轨迹-->
+	<update id="update.updateJobExecuteLog.sql" parameterClass="java.util.HashMap">
+ 		<![CDATA[
+			update cbp_job_execute_log
+			set state=#state#,
+			   state_desc=#state_desc#,
+			   error_msg=#error_msg#,
+			   execute_time=#execute_time#,
+			   updated_date=sysdate
+			where id_cbp_job_execute_log=#log_id#
+ 		]]>
+ 	</update>
+ 	
+ 	
+ 	
+	<select id="lockSingleJobConfig.sql" parameterClass="java.util.HashMap"  resultClass="java.lang.String">
+		<![CDATA[
+			 select id_cbp_quartz_lock
+			 from cbp_quartz_lock
+			 where target_id=#targetId#
+			       and target_type=#targetType#
+				   and is_running = #isRunning#
+				   and rownum=1
+				   for update nowait
+		]]>
+	</select>
+	
+	<update id="updateJobConfigById.sql" parameterClass="java.util.HashMap">
+		update cbp_quartz_lock 
+		set updated_date = sysdate
+		 <isNotEmpty property="lockBy" prepend=",">
+			   lock_by=#lockBy#
+	     </isNotEmpty>
+		 <isNotEmpty property="lockBy" prepend=",">
+			   updated_by=#lockBy#
+	     </isNotEmpty>
+	     <isNotEmpty property="isRunning" prepend=",">
+			   is_running=#isRunning#
+	     </isNotEmpty>
+		where id_cbp_quartz_lock = #jobId#
+	</update> 
+	
+</sqlMap>

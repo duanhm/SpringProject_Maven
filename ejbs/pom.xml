@@ -1,0 +1,230 @@
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>root.project</groupId>
+   <artifactId>ejbs</artifactId>
+   <packaging>ejb</packaging>
+   <version>1.0</version>
+   <name>enterprise java beans</name>
+   <parent>
+      <groupId>root</groupId>
+      <artifactId>project</artifactId>
+      <version>1.0</version>
+   </parent>
+   <dependencies>
+      <!--架包依赖 start-->
+
+      <!-- ############################################################### Spring 相关包 start ############################################################### -->
+      <!--spring 源码包下载地址：https://github.com/spring-projects/spring-framework/releases-->
+      <!--http://takeme.iteye.com/blog/1977585-->
+      <!--http://blog.csdn.net/bluishglc/article/details/6585221-->
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-aop</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-asm</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-aspects</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-beans</artifactId>
+      </dependency>
+
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-context-support</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-context</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-core</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-jdbc</artifactId>
+      </dependency>
+
+      <!--这个jar 文件包含Spring MVC 框架相关的所有类。包括框架的Servlets，Web MVC框架，控制器和视图支持。当然，如果你的应用使用了独立的MVC 框架，则无需这个JAR 文件里的任何类。 外部依赖spring-web-->
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-webmvc</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-oxm</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-tx</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-orm</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-test</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>aopalliance</groupId>
+         <artifactId>aopalliance</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>asm</groupId>
+         <artifactId>asm</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.aspectj</groupId>
+         <artifactId>aspectjrt</artifactId>
+      </dependency>
+
+
+      <!--下面两个提供对 AspectJ 的支持，是 spring-aspects 所需要依赖的-->
+      <dependency>
+         <groupId>org.aspectj</groupId>
+         <artifactId>aspectjweaver</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>cglib</groupId>
+         <artifactId>cglib</artifactId>
+      </dependency>
+
+      <!--apache工具包-->
+      <dependency>
+         <groupId>commons-codec</groupId>
+         <artifactId>commons-codec</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.commons</groupId>
+         <artifactId>commons-lang3</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>commons-lang</groupId>
+         <artifactId>commons-lang</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>commons-logging</groupId>
+         <artifactId>commons-logging</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>commons-pool</groupId>
+         <artifactId>commons-pool</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>dom4j</groupId>
+         <artifactId>dom4j</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>com.alibaba</groupId>
+         <artifactId>fastjson</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.apache.ibatis</groupId>
+         <artifactId>ibatis-sqlmap</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.codehaus.jackson</groupId>
+         <artifactId>jackson-mapper-asl</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.codehaus.jackson</groupId>
+         <artifactId>jackson-core-asl</artifactId>
+      </dependency>
+
+      <dependency>
+         <artifactId>jedis</artifactId>
+         <groupId>redis.clients</groupId>
+      </dependency>
+
+      <!--单元测试-->
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <!-- 日志文件管理包 start -->
+      <dependency>
+         <groupId>log4j</groupId>
+         <artifactId>log4j</artifactId>
+      </dependency>
+
+      <!-- mybatis核心包 -->
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis</artifactId>
+      </dependency>
+      <!-- mybatis/spring包 -->
+      <!--官网英文材料：http://www.mybatis.org/spring/-->
+      <!--官网中文资料：http://www.mybatis.org/spring/zh/index.html-->
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis-spring</artifactId>
+      </dependency>
+
+      <!-- 导入Mysql数据库链接jar包 -->
+      <dependency>
+         <groupId>mysql</groupId>
+         <artifactId>mysql-connector-java</artifactId>
+      </dependency>
+
+      <!-- 导入oracle数据库链接jar包 -->
+      <dependency>
+         <groupId>com.oracle</groupId>
+         <artifactId>ojdbc14</artifactId>
+      </dependency>
+
+      <!--quartz-->
+      <dependency>
+         <groupId>org.quartz-scheduler</groupId>
+         <artifactId>quartz</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>javax.ejb</groupId>
+         <artifactId>javax.ejb-api</artifactId>
+         <version>3.2</version>
+      </dependency>
+
+   </dependencies>
+   <build>
+      <plugins>
+         <plugin>
+            <artifactId>maven-ejb-plugin</artifactId>
+            <configuration>
+               <archive>
+                  <manifest>
+                     <addClasspath>true</addClasspath>
+                  </manifest>
+               </archive> 
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+</project>

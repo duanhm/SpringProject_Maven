@@ -1,0 +1,36 @@
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="springProject">
+	<!-- 处理数据时记录处理日志 -->
+	<insert id="writeProcessLog" parameterClass="map">
+	<![CDATA[
+          	insert into cbp_interface_process_log 
+	          	(id_interface_process_log,
+	          	 business_no, 
+	          	 sys_id, 
+	          	 trx_type, 
+	          	 trx_date, 
+	          	 error_code,
+	          	 error_msg ,
+	          	 data_info, 
+	             created_by,
+	             created_date,
+	             updated_by,
+	             updated_date) 
+          	values 
+	          	(sys_guid(),
+	          	 #businessNo#, 
+	          	 #sysId#, 
+	          	 #trxType#, 
+	          	 sysdate, 
+	          	 #errorCode#, 
+	          	 #errorMsg#, 
+	          	 #dataInfo#,
+	          	 'sys', 
+	          	 sysdate,
+	          	 'sys',
+	          	 sysdate);
+    ]]>
+	</insert>
+</sqlMap>
